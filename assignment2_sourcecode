@@ -1,0 +1,67 @@
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import ProfileImage from 'assets/profile.PNG';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      {/* The code below will display my BioSketch @ UC, and it's amazing!!!!! */}
+      <Text style={styles.headerText}>Dr. Jay Thom, Ph.D., CISSP{"\n"}Adjunct Professor</Text>
+      <Text style={styles.subHeaderText}>Instructor: MSCS-533-B01</Text>
+      <Text style={styles.educationText}>Education:{"\n"}Ph.D. Computer Science and Engineering{"\n"}University of Nevada-Reno (Reno, Nevada)</Text>
+      <View style={styles.bioContainer}>
+        <Text style={styles.bioText}>WELCOME TO THE UNIVERSITY of the CUMBERLANDS{"\n"}Course ID: MSCS 533</Text>
+        <Image source={ProfileImage} style={styles.image} />
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#e60026', 
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  subHeaderText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  educationText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  bioContainer: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    width: '90%',
+  },
+  bioText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+});
