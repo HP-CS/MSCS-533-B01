@@ -1,0 +1,125 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ConversionApp());
+}
+
+class ConversionApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Measures Converter',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: ConversionScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class ConversionScreen extends StatefulWidget {
+  @override
+  _ConversionScreenState createState() => _ConversionScreenState();
+}
+
+class _ConversionScreenState extends State<ConversionScreen> {
+  final TextEditingController _valueController = TextEditingController();
+  String _fromUnit = 'meters';
+  String _toUnit = 'feet';
+  String _result = '';
+
+  final Map<String, double> conversionRates = {
+    'meters_to_feet': 3.28084,
+    'feet_to_meters': 0.3048,
+    'miles_to_kilometers': 1.60934,
+    'kilometers_to_miles': 0.621371,
+    'kilograms_to_pounds': 2.20462,
+    'pounds_to_kilograms': 0.453592,
+  };
+
+  void _convert() {
+    double? inputValue = double.tryParse(_valueController.text);
+    if (inputValue == null) {
+      setState(() {
+        _result = 'Invalid input';
+      });
+      return;
+    }
+
+    String key = '${_fromUnit}_to_${_toUnit}';
+    if (conversionRates.containsKey(key)) {
+      double convertedValue = inputValue * conversionRates[key]!;
+      setState(() {
+        _result = '${inputValue.toStringAsFixed(1)} $_fromUnit are ${convertedValue.toStringAsFixed(3)} $_toUnit';
+      });
+    } else {
+      setState(() {
+        _result = 'Conversion not available';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Measures Converter')),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Value', style: TextStyle(fontSize: 18)),
+            TextField(controller: _valueController, keyboardType: TextInputType.number),
+            SizedBox(height: 16),
+            Text('From', style: TextStyle(fontSize: 18)),
+            DropdownButton<String>(
+              value: _fromUnit,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _fromUnit = newValue!;
+                });
+              },
+              items: ['meters', 'feet', 'miles', 'kilometers', 'kilograms', 'pounds']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16),
+            Text('To', style: TextStyle(fontSize: 18)),
+            DropdownButton<String>(
+              value: _toUnit,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _toUnit = newValue!;
+                });
+              },
+              items: ['meters', 'feet', 'miles', 'kilometers', 'kilograms', 'pounds']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: ElevatedButton(
+                onPressed: _convert,
+                child: Text('Convert'),
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                _result,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
