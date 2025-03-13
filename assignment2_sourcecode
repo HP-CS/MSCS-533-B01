@@ -6,9 +6,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* The code below will display my BioSketch @ UC, and it's amazing!!!!! */}
-      <Text style={styles.headerText}>Dr. Jay Thom, Ph.D., CISSP{"\n"}Adjunct Professor</Text>
-      <Text style={styles.subHeaderText}>Instructor: MSCS-533-B01</Text>
-      <Text style={styles.educationText}>Education:{"\n"}Ph.D. Computer Science and Engineering{"\n"}University of Nevada-Reno (Reno, Nevada)</Text>
+      <Text style={styles.headerText}>Heehyung Park{"\n"}Student</Text>
+      <Text style={styles.subHeaderText}>Course: MSCS-533-B01</Text>
+      <Text style={styles.educationText}>Education:{"\n"}Master in Computer Science {"\n"}Cumberlands University</Text>
       <View style={styles.bioContainer}>
         <Text style={styles.bioText}>WELCOME TO THE UNIVERSITY of the CUMBERLANDS{"\n"}Course ID: MSCS 533</Text>
         <Image source={ProfileImage} style={styles.image} />
